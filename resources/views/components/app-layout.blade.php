@@ -16,10 +16,10 @@
         <div id="app-shell" class="flex min-h-screen bg-slate-100">
             <aside
                 id="app-sidebar"
-                class="z-40 border-r border-slate-200 bg-slate-900 text-slate-100 transition-all duration-300"
+                class="z-40 border-r border-slate-200 bg-blue-700 text-slate-100 transition-all duration-300"
                 :class="sidebarOpen ? 'w-72' : 'w-20'">
                 <div class="flex h-16 items-center border-b border-white/10 px-4" :class="sidebarOpen ? 'gap-3 justify-start' : 'justify-center'">
-                    <x-application-logo class="h-10 w-10 text-white" />
+                    <x-application-logo class="h-10 w-10 text-white"/>
                     <div x-show="sidebarOpen" x-transition.opacity>
                         <div class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">RAPOS</div>
                         <div class="text-xs text-slate-400">Admin Panel</div>
