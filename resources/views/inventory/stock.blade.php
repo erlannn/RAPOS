@@ -1,10 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold text-slate-900">Stok Barang</h2>
-    </x-slot>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Stok Barang') }}
+    </h2>
 
-    <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <div class="text-slate-900 font-medium">Halaman Stok Barang</div>
-        <p class="mt-2 text-sm text-slate-600">Halaman ini disiapkan untuk menampilkan stok barang.</p>
+    <h1>Halaman Stok Barang</h1>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    Selamat Datang di Halaman Stok Barang
+                </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>
