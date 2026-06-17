@@ -6,19 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id('UserID');
+            $table->unsignedBigInteger('RoleID');
+            $table->unsignedBigInteger('StoreID');
+            $table->string('Nama', 150);
+            $table->string('Username', 100)->unique();
+            $table->string('Email', 150)->unique();
+            $table->string('Password', 255);
+            $table->boolean('StatusAktif')->default(1);
+            $table->dateTime('LastLogin')->nullable();
+            $table->timestamp('CreatedAt')->useCurrent()->nullable();
+            $table->timestamp('UpdatedAt')->useCurrent()->useCurrentOnUpdate()->nullable();
+
+            // Note: role table is not provided in your query, but we add foreign key if you want
+            // $table->foreign('RoleID', 'fk_users_role')->references('RoleID')->on('role');
+            $table->foreign('StoreID', 'fk_users_store')->references('StoreID')->on('store');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -37,9 +42,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');
