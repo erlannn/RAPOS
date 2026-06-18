@@ -1,83 +1,88 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-                        <div class="hidden lg:block text-sm text-slate-500">
-                            {{ config('app.name', 'RAPOS') }}
-                        </div>
+<head>
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'RAPOS') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
-                    @isset($header)
-                        <div class="mb-6 rounded-2xl bg-white px-6 py-4 shadow-sm ring-1 ring-slate-200">
-                            {{ $header }}
-                        </div>
-                    @endisset
+
+    {{-- Grafik --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @isset($header)
+        <div class="mb-6 rounded-2xl bg-white px-6 py-4 shadow-sm ring-1 ring-slate-200">
+            {{ $header }}
+        </div>
+    @endisset
 
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js'])
 </head>
 <body class="font-sans antialiased bg-slate-100">
-    <div x-data="{ sidebarOpen: false, masterDataOpen: true, inventoryOpen: true }" class="min-h-screen">
+    <div x-data="{ sidebarOpen: true, masterDataOpen: {{ request()->routeIs('master-data.*') ? 'true' : 'false' }}, inventoryOpen: {{ request()->routeIs('inventory.*') ? 'true' : 'false' }} }" class="min-h-screen">
         <div class="flex min-h-screen bg-slate-100">
             <aside
-                class="fixed inset-y-0 left-0 z-40 w-72 transform border-r border-slate-200 bg-slate-900 text-slate-100 transition-transform duration-300 lg:translate-x-0"
-                :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
-                <div class="flex h-16 items-center gap-3 border-b border-white/10 px-6">
+                class="z-40 border-r border-slate-200 bg-gradient-to-t from-gray-900 to-blue-800 text-slate-100 transition-all duration-300"
+                :class="sidebarOpen ? 'w-72' : 'w-20'">
+                <div class="flex h-16 items-center border-b border-white/30 px-4" :class="sidebarOpen ? 'gap-3 justify-start' : 'justify-center'">
                     <x-application-logo class="h-10 w-10 text-white" />
-                    <div>
-                        <div class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">RAPOS</div>
-                        <div class="text-xs text-slate-400">Admin Panel</div>
+                    <div x-show="sidebarOpen" x-transition.opacity>
+                        <div class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-200">RAPOS</div>
+                        <div class="text-xs text-slate-300">Admin Panel</div>
                     </div>
                 </div>
 
-                <nav class="space-y-2 px-4 py-5 text-sm font-medium">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-white/10 {{ request()->routeIs('dashboard') ? 'bg-white/10 text-white' : 'text-slate-300' }}">
+                <nav class="space-y-2 px-3 py-5 text-sm font-medium">
+                    <a href="{{ route('dashboard') }}" class="flex items-center rounded-xl px-3 py-3 transition hover:bg-white/10 {{ request()->routeIs('dashboard') ? 'bg-white/20 text-white' : 'text-slate-300' }}" :class="sidebarOpen ? 'gap-3 justify-start' : 'justify-center'">
                         <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-base">D</span>
-                        <span>Dashboard</span>
+                        <span x-show="sidebarOpen" x-transition.opacity>Dashboard</span>
                     </a>
 
                     <div>
-                        <button type="button" @click="masterDataOpen = ! masterDataOpen" class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-slate-300 transition hover:bg-white/10">
-                            <span class="flex items-center gap-3">
+                        <button type="button" @click="masterDataOpen = ! masterDataOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
+                            <span class="flex items-center" :class="sidebarOpen ? 'gap-3' : 'justify-center'">
                                 <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/20 text-base text-emerald-300">M</span>
-                                <span>Master Data</span>
+                                <span x-show="sidebarOpen" x-transition.opacity>Master Data</span>
                             </span>
-                            <svg class="h-4 w-4 transition-transform" :class="masterDataOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <svg x-show="sidebarOpen" x-transition.opacity class="h-4 w-4 transition-transform" :class="masterDataOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z" clip-rule="evenodd" />
                             </svg>
                         </button>
 
-                        <div x-show="masterDataOpen" x-transition class="mt-2 space-y-1 pl-4" style="display: none;">
-                            <a href="{{ route('master-data.produk') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.produk') ? 'bg-white/10 text-white' : '' }}">Produk</a>
-                            <a href="{{ route('master-data.supplier') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.supplier') ? 'bg-white/10 text-white' : '' }}">Supplier</a>
+                        <div x-show="sidebarOpen && masterDataOpen" x-transition class="mt-2 space-y-1 pl-4" style="display: none;">
+                            <a href="{{ route('master-data.produk') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.produk') ? 'bg-white/20 text-white' : '' }}">Produk</a>
+                            <a href="{{ route('master-data.supplier') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.supplier') ? 'bg-white/20 text-white' : '' }}">Supplier</a>
                         </div>
                     </div>
 
                     <div>
-                        <button type="button" @click="inventoryOpen = ! inventoryOpen" class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-slate-300 transition hover:bg-white/10">
-                            <span class="flex items-center gap-3">
+                        <button type="button" @click="inventoryOpen = ! inventoryOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
+                            <span class="flex items-center" :class="sidebarOpen ? 'gap-3' : 'justify-center'">
                                 <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-500/20 text-base text-amber-300">I</span>
-                                <span>Inventory</span>
+                                <span x-show="sidebarOpen" x-transition.opacity>Inventory</span>
                             </span>
-                            <svg class="h-4 w-4 transition-transform" :class="inventoryOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <svg x-show="sidebarOpen" x-transition.opacity class="h-4 w-4 transition-transform" :class="inventoryOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z" clip-rule="evenodd" />
                             </svg>
                         </button>
 
-                        <div x-show="inventoryOpen" x-transition class="mt-2 space-y-1 pl-4" style="display: none;">
-                            <a href="{{ route('inventory.stock') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.stock') ? 'bg-white/10 text-white' : '' }}">Stok Barang</a>
-                            <a href="{{ route('inventory.incoming') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.incoming') ? 'bg-white/10 text-white' : '' }}">Barang Masuk</a>
-                            <a href="{{ route('inventory.outgoing') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.outgoing') ? 'bg-white/10 text-white' : '' }}">Barang Keluar</a>
+                        <div x-show="sidebarOpen && inventoryOpen" x-transition class="mt-2 space-y-1 pl-4" style="display: none;">
+                            <a href="{{ route('inventory.stock') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.stock') ? 'bg-white/20 text-white' : '' }}">Stok Barang</a>
+                            <a href="{{ route('inventory.incoming') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.incoming') ? 'bg-white/20 text-white' : '' }}">Barang Masuk</a>
+                            <a href="{{ route('inventory.outgoing') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.outgoing') ? 'bg-white/20 text-white' : '' }}">Barang Keluar</a>
                         </div>
                     </div>
                 </nav>
             </aside>
 
-            <div class="flex min-h-screen flex-1 flex-col lg:pl-72">
+            <div class="flex min-h-screen flex-1 flex-col transition-all duration-300">
                 <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
                     <div class="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
                         <div class="flex items-center gap-3">
-                            <button type="button" @click="sidebarOpen = ! sidebarOpen" class="inline-flex items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100 lg:hidden">
+                            <button type="button" @click="sidebarOpen = ! sidebarOpen" class="inline-flex items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100">
                                 <span class="sr-only">Toggle sidebar</span>
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M3 5.75A.75.75 0 0 1 3.75 5h12.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 5.75Zm0 4.25A.75.75 0 0 1 3.75 9h12.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 10Zm0 4.25a.75.75 0 0 1 .75-.75h12.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
@@ -92,7 +97,7 @@
                         </div>
 
                         <div x-data="{ open: false }" class="relative">
-                            <button type="button" @click="open = ! open" class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-left shadow-sm transition hover:bg-slate-50">
+                            <button type="button" @click="open = ! open" class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-left shadow-sm transition hover:bg-slate-200">
                                 <div class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
                                     {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
                                 </div>
@@ -122,8 +127,6 @@
             </div>
         </div>
 
-        <div x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 z-30 bg-slate-900/50 lg:hidden" @click="sidebarOpen = false" style="display: none;"></div>
     </div>
 </body>
-</html>
 </html>
