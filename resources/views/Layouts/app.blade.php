@@ -9,6 +9,9 @@
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
+
+    {{-- Grafik --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @isset($header)
         <div class="mb-6 rounded-2xl bg-white px-6 py-4 shadow-sm ring-1 ring-slate-200">
             {{ $header }}
@@ -16,13 +19,13 @@
     @endisset
 
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js'])
 </head>
 <body class="font-sans antialiased bg-slate-100">
     <div x-data="{ sidebarOpen: true, masterDataOpen: {{ request()->routeIs('master-data.*') ? 'true' : 'false' }}, inventoryOpen: {{ request()->routeIs('inventory.*') ? 'true' : 'false' }} }" class="min-h-screen">
         <div class="flex min-h-screen bg-slate-100">
             <aside
-                class="z-40 border-r border-slate-200 bg-gradient-to-t from-gray-800 to-blue-800 text-slate-100 transition-all duration-300"
+                class="z-40 border-r border-slate-200 bg-gradient-to-t from-gray-900 to-blue-800 text-slate-100 transition-all duration-300"
                 :class="sidebarOpen ? 'w-72' : 'w-20'">
                 <div class="flex h-16 items-center border-b border-white/30 px-4" :class="sidebarOpen ? 'gap-3 justify-start' : 'justify-center'">
                     <x-application-logo class="h-10 w-10 text-white" />
