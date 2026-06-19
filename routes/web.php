@@ -21,7 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::view('/master-data/produk', 'Master-data.Produk.Produk')->name('master-data.produk');
+    Route::view('/master-data/produk/tambah', 'Master-data.Produk.Tambah')->name('master-data.produk.tambah');
+    Route::view('/master-data/produk/edit', 'Master-data.Produk.Edit')->name('master-data.produk.edit');
     Route::view('/master-data/supplier', 'Master-data.Supplier.Supplier')->name('master-data.supplier');
+    Route::view('/master-data/supplier/tambah', 'Master-data.Supplier.Tambah')->name('master-data.supplier.tambah');
+    Route::view('/master-data/supplier/edit', 'Master-data.Supplier.Edit')->name('master-data.supplier.edit');
 
     Route::view('/inventory/stok', 'inventory.stock')->name('inventory.stock');
     Route::view('/inventory/barang-masuk', 'inventory.incoming')->name('inventory.incoming');

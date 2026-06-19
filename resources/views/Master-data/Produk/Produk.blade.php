@@ -1,7 +1,4 @@
 <x-app-layout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Produk') }}
-    </h2>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -31,9 +28,9 @@
 
                 <!-- Tombol & Search -->
                 <div class="flex gap-3">
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
+                    <a href="{{ route('master-data.produk.tambah') }}" class="bg-blue-600 text-white px-3 py-2 rounded-lg shadow hover:bg-blue-700 text-sm flex items-center">
                         + Tambah Produk
-                    </button>
+                    </a>
                     <input type="text" placeholder="Cari produk..."
                         class="border rounded-lg px-3 py-2 text-sm text-gray-700 w-48">
                 </div>
@@ -77,8 +74,8 @@
                                     <td class="px-3 py-2 border">{{ $product['departemen'] }}</td>
                                     <td class="px-3 py-2 border">{{ $product['status'] }}</td>
                                     <td class="px-3 py-2 border">
-                                        <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Edit</button>
-                                        <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700">Hapus</button>
+                                        <a href="{{ route('master-data.produk.edit') }}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 text-xs inline-block">Edit</a>
+                                        <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-xs">Hapus</button>
                                     </td>
                                 </tr>
                             @endforeach

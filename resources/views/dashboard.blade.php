@@ -7,7 +7,8 @@
                 'note' => 'Data dummy',
                 'description' => 'Total omzet periode berjalan',
                 'gradient' => 'from-rose-500 to-pink-500',
-                'icon' => '<path d="M4 19h16M6 17V9m4 8V5m4 12v-6m4 6V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
+                'icon' =>
+                    '<path d="M4 19h16M6 17V9m4 8V5m4 12v-6m4 6V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
             ],
             [
                 'title' => 'Transaksi',
@@ -15,7 +16,8 @@
                 'note' => 'Data dummy',
                 'description' => 'Order yang diproses sukses',
                 'gradient' => 'from-sky-500 to-cyan-500',
-                'icon' => '<path d="M7 7h10M7 11h10M7 15h6M5 3.75h14a1.25 1.25 0 0 1 1.25 1.25v12.5A1.25 1.25 0 0 1 19 18.75H5A1.25 1.25 0 0 1 3.75 17.5V5A1.25 1.25 0 0 1 5 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
+                'icon' =>
+                    '<path d="M7 7h10M7 11h10M7 15h6M5 3.75h14a1.25 1.25 0 0 1 1.25 1.25v12.5A1.25 1.25 0 0 1 19 18.75H5A1.25 1.25 0 0 1 3.75 17.5V5A1.25 1.25 0 0 1 5 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
             ],
             [
                 'title' => 'Margin',
@@ -23,7 +25,8 @@
                 'note' => 'Data dummy',
                 'description' => 'Rasio keuntungan bersih',
                 'gradient' => 'from-emerald-500 to-lime-500',
-                'icon' => '<path d="M12 3v18M7 7.5c0-1.933 2.239-3.5 5-3.5s5 1.567 5 3.5S14.761 11 12 11s-5 1.567-5 3.5S9.239 18 12 18s5-1.567 5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
+                'icon' =>
+                    '<path d="M12 3v18M7 7.5c0-1.933 2.239-3.5 5-3.5s5 1.567 5 3.5S14.761 11 12 11s-5 1.567-5 3.5S9.239 18 12 18s5-1.567 5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
             ],
             [
                 'title' => 'Inventory',
@@ -31,7 +34,8 @@
                 'note' => 'Data dummy',
                 'description' => 'Stok aktif yang terpantau',
                 'gradient' => 'from-amber-500 to-orange-500',
-                'icon' => '<path d="M4.75 7.5 12 3.75l7.25 3.75M4.75 7.5 12 11.25M4.75 7.5v8.75L12 20m0-8.75V20m0-8.75 7.25-3.75M19.25 7.5v8.75L12 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
+                'icon' =>
+                    '<path d="M4.75 7.5 12 3.75l7.25 3.75M4.75 7.5 12 11.25M4.75 7.5v8.75L12 20m0-8.75V20m0-8.75 7.25-3.75M19.25 7.5v8.75L12 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />',
             ],
         ];
     @endphp
@@ -41,9 +45,11 @@
             <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <h2 class="text-2xl font-semibold text-slate-900">Dashboard</h2>
-                    <p class="mt-1 text-sm text-slate-500">Ringkasan sederhana untuk penjualan, transaksi, margin, dan inventory.</p>
+                    <p class="mt-1 text-sm text-slate-500">Ringkasan sederhana untuk penjualan, transaksi, margin, dan
+                        inventory.</p>
                 </div>
-                <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">Data saat ini masih dummy</div>
+                <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">Data saat ini masih
+                    dummy</div>
             </div>
         </section>
 
@@ -58,7 +64,8 @@
                             <div class="mt-1 text-sm text-slate-500">{{ $card['description'] }}</div>
                         </div>
 
-                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br {{ $card['gradient'] }} text-white shadow-sm">
+                        <div
+                            class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br {{ $card['gradient'] }} text-white shadow-sm">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 {!! $card['icon'] !!}
                             </svg>
@@ -72,7 +79,8 @@
         </section>
 
         <section class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-500">
-            Area ini sudah disiapkan untuk data real dari database. Nanti controller bisa mengirim variabel yang sama, lalu isi dummy di atas tinggal diganti tanpa mengubah struktur kartu.
+            Area ini sudah disiapkan untuk data real dari database. Nanti controller bisa mengirim variabel yang sama,
+            lalu isi dummy di atas tinggal diganti tanpa mengubah struktur kartu.
         </section>
 
         <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm mt-6">
@@ -104,7 +112,6 @@
                 </div>
             </div>
         </section>
-
     </div>
 
 </x-app-layout>
