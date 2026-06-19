@@ -99,11 +99,11 @@
                         <div x-data="{ open: false }" class="relative">
                             <button type="button" @click="open = ! open" class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-left shadow-sm transition hover:bg-slate-200">
                                 <div class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
-                                    {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
+                                    {{ strtoupper(substr(Auth::user()->Nama ?? 'U', 0, 1)) }}
                                 </div>
                                 <div class="hidden sm:block">
-                                    <div class="text-sm font-semibold text-slate-900">{{ Auth::user()->name }}</div>
-                                    <div class="text-xs text-slate-500">{{ Auth::user()->email }}</div>
+                                    <div class="text-sm font-semibold text-slate-900">{{ Auth::user()->Nama }}</div>
+                                    <div class="text-xs text-slate-500">{{ Auth::user()->Email }}</div>
                                 </div>
                                 <svg class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z" clip-rule="evenodd" />
