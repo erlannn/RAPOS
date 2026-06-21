@@ -1,0 +1,119 @@
+{
+    "Brand": {
+        "table": "brand",
+        "primaryKey": "BrandID",
+        "fillable": [
+            "NamaBrand",
+            "StatusAktif",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "Departemen": {
+        "table": "departemen",
+        "primaryKey": "DepartemenID",
+        "fillable": [
+            "Nama",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "Kategori": {
+        "table": "kategori",
+        "primaryKey": "KategoriID",
+        "fillable": [
+            "DepartemenID",
+            "Nama",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "SubKategori": {
+        "table": "sub_kategori",
+        "primaryKey": "SubKategoriID",
+        "fillable": [
+            "KategoriID",
+            "Nama",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "Store": {
+        "table": "store",
+        "primaryKey": "StoreID",
+        "fillable": [
+            "KodeStore",
+            "NamaStore",
+            "TipeLokasi",
+            "Alamat",
+            "NoTelp",
+            "StatusAktif",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "Inventori": {
+        "table": "inventori",
+        "primaryKey": "InventoriID",
+        "fillable": [
+            "ProdukID",
+            "StoreID",
+            "StokSaatIni",
+            "MinimumStok",
+            "HargaBeliTerakhir",
+            "HargaJual",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "MutasiStok": {
+        "table": "mutasi_stok",
+        "primaryKey": "MutasiID",
+        "fillable": [
+            "Tanggal",
+            "ProdukID",
+            "StoreID",
+            "JenisMutasi",
+            "ReferensiTabel",
+            "ReferensiID",
+            "Qty",
+            "SaldoSebelum",
+            "SaldoSesudah",
+            "Keterangan",
+            "UserID",
+            "CreatedAt"
+        ]
+    },
+    "Produk": {
+        "table": "produk",
+        "primaryKey": "ProdukID",
+        "fillable": [
+            "BrandID",
+            "KategoriID",
+            "SubKategoriID",
+            "SKU",
+            "Barcode",
+            "NamaProduk",
+            "Satuan",
+            "Deskripsi",
+            "StatusAktif",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    },
+    "Supplier": {
+        "table": "supplier",
+        "primaryKey": "SupplierID",
+        "fillable": [
+            "KodeSupplier",
+            "NamaSupplier",
+            "PIC",
+            "NoTelp",
+            "Email",
+            "Alamat",
+            "StatusAktif",
+            "CreatedAt",
+            "UpdatedAt"
+        ]
+    }
+}

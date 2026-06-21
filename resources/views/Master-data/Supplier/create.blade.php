@@ -2,7 +2,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold text-gray-800">Edit Supplier</h2>
+                <h2 class="text-xl font-semibold text-gray-800">Tambah Supplier Baru</h2>
                 <a href="{{ route('supplier.index') }}" class="bg-gray-500 text-white px-3 py-2 rounded-lg shadow hover:bg-gray-600 text-sm">
                     Kembali
                 </a>
@@ -10,37 +10,36 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <form action="{{ route('supplier.update', $supplier->SupplierID) }}" method="POST" class="space-y-4">
+                    <form action="{{ route('supplier.store') }}" method="POST" class="space-y-4">
                         @csrf
-                        @method('PUT')
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">KodeSupplier</label>
-                                <input type="text" name="KodeSupplier" value="{{ $supplier->KodeSupplier }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan KodeSupplier">
+                                <input type="text" name="KodeSupplier" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan KodeSupplier">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">NamaSupplier</label>
-                                <input type="text" name="NamaSupplier" value="{{ $supplier->NamaSupplier }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan NamaSupplier">
+                                <input type="text" name="NamaSupplier" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan NamaSupplier">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">PIC</label>
-                                <input type="text" name="PIC" value="{{ $supplier->PIC }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan PIC">
+                                <input type="text" name="PIC" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan PIC">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">NoTelp</label>
-                                <input type="text" name="NoTelp" value="{{ $supplier->NoTelp }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan NoTelp">
+                                <input type="text" name="NoTelp" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan NoTelp">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="text" name="Email" value="{{ $supplier->Email }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Email">
+                                <input type="text" name="Email" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Email">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Alamat</label>
-                                <input type="text" name="Alamat" value="{{ $supplier->Alamat }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Alamat">
+                                <input type="text" name="Alamat" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Alamat">
                             </div>
                             <div class="flex items-center mt-6">
                                 <input type="hidden" name="StatusAktif" value="0">
-                                <input type="checkbox" name="StatusAktif" value="1" {{ $supplier->StatusAktif == 1 ? 'checked' : '' }} class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <input type="checkbox" name="StatusAktif" value="1" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Status Aktif
                                 </label>
@@ -52,7 +51,7 @@
                                 Batal
                             </a>
                             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 text-sm">
-                                Simpan Perubahan
+                                Simpan
                             </button>
                         </div>
                     </form>

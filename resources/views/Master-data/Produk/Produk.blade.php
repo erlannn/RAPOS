@@ -28,7 +28,7 @@
 
                 <!-- Tombol & Search -->
                 <div class="flex gap-3">
-                    <a href="{{ route('master-data.produk.tambah') }}" class="bg-blue-600 text-white px-3 py-2 rounded-lg shadow hover:bg-blue-700 text-sm flex items-center">
+                    <a href="{{ route('produk.create') }}" class="bg-blue-600 text-white px-3 py-2 rounded-lg shadow hover:bg-blue-700 text-sm flex items-center">
                         + Tambah Produk
                     </a>
                     <input type="text" placeholder="Cari produk..."
@@ -55,27 +55,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $products = [
-                                    ['barcode' => '123456789', 'nama' => 'Produk A', 'satuan' => 'pcs', 'hpp' => 10000, 'harga' => 15000, 'margin' => '50%', 'departemen' => 'Makanan', 'status' => 'Aktif'],
-                                    ['barcode' => '987654321', 'nama' => 'Produk B', 'satuan' => 'botol', 'hpp' => 8000, 'harga' => 12000, 'margin' => '50%', 'departemen' => 'Minuman', 'status' => 'Aktif'],
-                                ];
-                            @endphp
-
-                            @foreach ($products as $index => $product)
+                            @foreach ($produk as $index => $product)
                                 <tr>
                                     <td class="px-3 py-2 border">{{ $index + 1 }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['barcode'] }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['nama'] }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['satuan'] }}</td>
-                                    <td class="px-3 py-2 border">Rp {{ number_format($product['hpp'], 0, ',', '.') }}</td>
-                                    <td class="px-3 py-2 border">Rp {{ number_format($product['harga'], 0, ',', '.') }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['margin'] }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['departemen'] }}</td>
-                                    <td class="px-3 py-2 border">{{ $product['status'] }}</td>
+                                    <td class="px-3 py-2 border">{{ $product->Barcode }}</td>
+                                    <td class="px-3 py-2 border">{{ $product->NamaProduk }}</td>
+                                    <td class="px-3 py-2 border">{{ $product->Satuan }}</td>
+                                    <td class="px-3 py-2 border">{{ $product->Deskripsi ?? '-' }}</td>
+                                    <td class="px-3 py-2 border">-</td>
+                                    <td class="px-3 py-2 border">-</td>
+                                    <td class="px-3 py-2 border">-</td>
                                     <td class="px-3 py-2 border">
-                                        <a href="{{ route('master-data.produk.edit') }}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 text-xs inline-block">Edit</a>
-                                        <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-xs">Hapus</button>
+                                        @if($product->StatusAktif == 1)
+                                            <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                                        @else
+                                            <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Tidak Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-3 py-2 border">
+                                        <a href="{{ route('produk.edit', $product->ProdukID) }}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 text-xs inline-block">Edit</a>
+                                        <form action="{{ route('produk.destroy', $product->ProdukID) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin hapus?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-xs">Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
