@@ -10,15 +10,16 @@ use App\Http\Controllers\InventoriController;
 use App\Http\Controllers\MutasiStokController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/403', function () {
-    return view('errors403');
-})->name('403');
+Route::get('/404', function () {
+    return view('errors404');
+})->name('404');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,6 +33,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('/master-data/store', StoreController::class)->except(['show']);
     Route::resource('/master-data/produk', ProdukController::class)->except(['show']);
     Route::resource('/master-data/supplier', SupplierController::class)->except(['show']);
+    
+    // Purchase Order CRUD
+    Route::resource('/inventory/purchase-order', PurchaseOrderController::class)->except(['show']);
 });
 
 Route::middleware(['auth', 'role:Admin|Gudang'])->group(function () {
@@ -46,5 +50,7 @@ Route::middleware(['auth', 'role:Admin|Gudang'])->group(function () {
     Route::view('/inventory/barang-masuk', 'inventory.incoming')->name('inventory.incoming');
     Route::view('/inventory/barang-keluar', 'inventory.outgoing')->name('inventory.outgoing');
 });
+
+
 
 require __DIR__.'/auth.php';

@@ -77,6 +77,7 @@
                         </button>
 
                         <div x-show="sidebarOpen && inventoryOpen" x-transition class="mt-2 space-y-1 pl-4" style="display: none;">
+                            <a href="{{ route('purchase-order.index') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('purchase-order.index') ? 'bg-white/20 text-white' : '' }}">Purchase Order</a>
                             <a href="{{ route('inventory.stock') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.stock') ? 'bg-white/20 text-white' : '' }}">Stok Barang</a>
                             <a href="{{ route('inventory.incoming') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.incoming') ? 'bg-white/20 text-white' : '' }}">Barang Masuk</a>
                             <a href="{{ route('inventory.outgoing') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.outgoing') ? 'bg-white/20 text-white' : '' }}">Barang Keluar</a>

@@ -20,12 +20,12 @@
                         </thead>
                         <tbody>
                             <tr>
-    <td class="px-3 py-2 border">1</td>
-    <td class="px-3 py-2 border">INV003</td>
-    <td class="px-3 py-2 border">Keluar</td>
-    <td class="px-3 py-2 border">20</td>
-    <td class="px-3 py-2 border">2023-02-01</td>
-    <td class="px-3 py-2 border text-center">
+                                <td class="px-3 py-2 border">1</td>
+                                <td class="px-3 py-2 border">INV003</td>
+                                <td class="px-3 py-2 border">Keluar</td>
+                                <td class="px-3 py-2 border">20</td>
+                                <td class="px-3 py-2 border">2023-02-01</td>
+                                <td class="px-3 py-2 border text-center">
         <a href="#" class="text-blue-600 hover:underline">Detail</a>
     </td>
 </tr>
