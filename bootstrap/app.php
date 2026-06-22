@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         // Kustomisasi halaman 404
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
-            return response()->view('errors403');
+            return response()->view('errors404');
         });
 
         // Redirect saat akses ditolak
