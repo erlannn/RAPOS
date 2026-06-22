@@ -16,4 +16,14 @@ class Kategori extends Model
     protected $fillable = [
         'DepartemenID', 'Nama', 'CreatedAt', 'UpdatedAt'
     ];
+
+    public function departemen()
+    {
+        return $this->belongsTo(Departemen::class, 'DepartemenID');
+    }
+
+    public function subKategori()
+    {
+        return $this->hasMany(SubKategori::class, 'KategoriID');
+    }
 }

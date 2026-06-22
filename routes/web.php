@@ -16,19 +16,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/app', function () {
-    return view('components.app-layout');
-});
+Route::get('/403', function () {
+    return view('errors403');
+})->name('403');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('/master-data/brand', BrandController::class)->except(['show']);
     Route::resource('/master-data/departemen', DepartemenController::class)->except(['show']);
     Route::resource('/master-data/kategori', KategoriController::class)->except(['show']);
@@ -36,6 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/master-data/store', StoreController::class)->except(['show']);
     Route::resource('/master-data/produk', ProdukController::class)->except(['show']);
     Route::resource('/master-data/supplier', SupplierController::class)->except(['show']);
+});
+
+Route::middleware(['auth', 'role:Admin|Gudang'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/inventory/inventori', InventoriController::class)->except(['show']);
     Route::resource('/inventory/mutasistok', MutasiStokController::class)->except(['show']);

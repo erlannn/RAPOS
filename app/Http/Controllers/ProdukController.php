@@ -7,10 +7,61 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produk = Produk::all();
-        return view('Master-data.Produk.Produk', compact('produk'));
+        $stores = \App\Models\Store::all();
+        $departemens = \App\Models\Departemen::all();
+        $subkategoris = \App\Models\SubKategori::with('kategori')->get();
+
+        $toko_id = $request->input('toko_id');
+        $departemen_id = $request->input('departemen_id');
+        $subkategori_id = $request->input('subkategori_id');
+        $search = $request->input('search');
+
+        $query = Produk::query();
+
+        if (!empty($search)) {
+            $query->where(function($q) use ($search) {
+                $q->where('NamaProduk', 'like', "%{$search}%")
+                  ->orWhere('Barcode', 'like', "%{$search}%")
+                  ->orWhere('SKU', 'like', "%{$search}%");
+            });
+        }
+
+        if (!empty($departemen_id)) {
+            $query->whereHas('kategori', function($q) use ($departemen_id) {
+                $q->where('DepartemenID', $departemen_id);
+            });
+        }
+
+        if (!empty($subkategori_id)) {
+            $query->where('SubKategoriID', $subkategori_id);
+        }
+
+        if (!empty($toko_id)) {
+            $query->whereHas('inventori', function($q) use ($toko_id) {
+                $q->where('StoreID', $toko_id);
+            });
+        }
+
+        $query->with(['kategori.departemen', 'subKategori', 'inventori' => function($q) use ($toko_id) {
+            if (!empty($toko_id)) {
+                $q->where('StoreID', $toko_id);
+            }
+        }]);
+
+        $produk = $query->get();
+
+        return view('Master-data.Produk.Produk', compact(
+            'produk', 
+            'stores', 
+            'departemens', 
+            'subkategoris', 
+            'toko_id', 
+            'departemen_id', 
+            'subkategori_id', 
+            'search'
+        ));
     }
 
     public function create()
@@ -44,7 +95,7 @@ class ProdukController extends Controller
         $departemens = \App\Models\Departemen::all();
         $kategoris = \App\Models\Kategori::all();
         $subkategoris = \App\Models\SubKategori::all();
-        return view('Master-data.Produk.edit', compact('produk', 'brands', 'departemens', 'kategoris', 'subkategoris'));
+        return view('Master-data.Produk.Edit', compact('produk', 'brands', 'departemens', 'kategoris', 'subkategoris'));
     }
 
     public function update(Request $request, $id)

@@ -22,7 +22,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js'])
 </head>
 <body class="font-sans antialiased bg-slate-100">
-    <div x-data="{ sidebarOpen: true, masterDataOpen: {{ request()->routeIs('master-data.*') ? 'true' : 'false' }}, inventoryOpen: {{ request()->routeIs('inventory.*') ? 'true' : 'false' }} }" class="min-h-screen">
+    <div x-data="{ sidebarOpen: true, masterDataOpen: {{ request()->is('master-data*') ? 'true' : 'false' }}, inventoryOpen: {{ request()->is('inventory*') ? 'true' : 'false' }} }" class="min-h-screen">
         <div class="flex min-h-screen bg-slate-100">
             <aside
                 class="z-40 border-r border-slate-200 bg-gradient-to-t from-gray-900 to-blue-800 text-slate-100 transition-all duration-300"
@@ -41,12 +41,13 @@
                         <span x-show="sidebarOpen" x-transition.opacity>Dashboard</span>
                     </a>
 
+                    @role('Admin')
                     <div>
-                        <button type="button" @click="masterDataOpen = ! masterDataOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('master-data.*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
+                        <button type="button" @click="masterDataOpen = ! masterDataOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->is('master-data*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
                             <span class="flex items-center" :class="sidebarOpen ? 'gap-3' : 'justify-center'">
                                 <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/20 text-base text-emerald-300">M</span>
                                 <span x-show="sidebarOpen" x-transition.opacity>Master Data</span>
-                            </span>
+                            </span> 
                             <svg x-show="sidebarOpen" x-transition.opacity class="h-4 w-4 transition-transform" :class="masterDataOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z" clip-rule="evenodd" />
                             </svg>
@@ -62,9 +63,10 @@
                             <a href="{{ route('store.index') }}" class="block rounded-lg px-4 py-2 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('store.*') ? 'bg-white/20 text-white' : '' }}">Store</a>
                         </div>
                     </div>
+                    @endrole
 
                     <div>
-                        <button type="button" @click="inventoryOpen = ! inventoryOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->routeIs('inventory.*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
+                        <button type="button" @click="inventoryOpen = ! inventoryOpen" class="flex w-full items-center rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 {{ request()->is('inventory*') ? 'bg-white/20 text-white' : '' }}" :class="sidebarOpen ? 'justify-between' : 'justify-center'">
                             <span class="flex items-center" :class="sidebarOpen ? 'gap-3' : 'justify-center'">
                                 <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-500/20 text-base text-amber-300">I</span>
                                 <span x-show="sidebarOpen" x-transition.opacity>Inventory</span>

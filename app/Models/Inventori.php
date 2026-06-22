@@ -16,4 +16,14 @@ class Inventori extends Model
     protected $fillable = [
         'ProdukID', 'StoreID', 'StokSaatIni', 'MinimumStok', 'HargaBeliTerakhir', 'HargaJual', 'CreatedAt', 'UpdatedAt'
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'ProdukID');
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'StoreID');
+    }
 }

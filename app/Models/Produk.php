@@ -16,4 +16,19 @@ class Produk extends Model
     protected $fillable = [
         'BrandID', 'KategoriID', 'SubKategoriID', 'SKU', 'Barcode', 'NamaProduk', 'Satuan', 'Deskripsi', 'StatusAktif', 'CreatedAt', 'UpdatedAt'
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'KategoriID');
+    }
+
+    public function subKategori()
+    {
+        return $this->belongsTo(SubKategori::class, 'SubKategoriID');
+    }
+
+    public function inventori()
+    {
+        return $this->hasMany(Inventori::class, 'ProdukID');
+    }
 }

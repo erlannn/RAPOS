@@ -16,13 +16,12 @@
                             <tr>
                                 <th class="px-3 py-2 border">No</th>
                                 <th class="px-3 py-2 border">KodeSupplier</th>
-<th class="px-3 py-2 border">NamaSupplier</th>
-<th class="px-3 py-2 border">PIC</th>
-<th class="px-3 py-2 border">NoTelp</th>
-<th class="px-3 py-2 border">Email</th>
-<th class="px-3 py-2 border">Alamat</th>
-<th class="px-3 py-2 border">StatusAktif</th>
-
+                                <th class="px-3 py-2 border">NamaSupplier</th>
+                                <th class="px-3 py-2 border">PIC</th>
+                                <th class="px-3 py-2 border">NoTelp</th>
+                                <th class="px-3 py-2 border">Email</th>
+                                <th class="px-3 py-2 border">Alamat</th>
+                                <th class="px-3 py-2 border">StatusAktif</th>
                                 <th class="px-3 py-2 border">Aksi</th>
                             </tr>
                         </thead>
@@ -31,11 +30,11 @@
                                 <tr>
                                     <td class="px-3 py-2 border">{{ $index + 1 }}</td>
                                     <td class="px-3 py-2 border">{{ $item->KodeSupplier }}</td>
-<td class="px-3 py-2 border">{{ $item->NamaSupplier }}</td>
-<td class="px-3 py-2 border">{{ $item->PIC }}</td>
-<td class="px-3 py-2 border">{{ $item->NoTelp }}</td>
-<td class="px-3 py-2 border">{{ $item->Email }}</td>
-<td class="px-3 py-2 border">{{ $item->Alamat }}</td>
+                                    <td class="px-3 py-2 border">{{ $item->NamaSupplier }}</td>
+                                    <td class="px-3 py-2 border">{{ $item->PIC }}</td>
+                                    <td class="px-3 py-2 border">{{ $item->NoTelp }}</td>
+                                    <td class="px-3 py-2 border">{{ $item->Email }}</td>
+                                    <td class="px-3 py-2 border">{{ $item->Alamat }}</td>
                             <td class="px-3 py-2 border text-center">
                                 @if($item->StatusAktif == 1)
                                     <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
