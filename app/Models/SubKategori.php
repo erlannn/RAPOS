@@ -16,4 +16,9 @@ class SubKategori extends Model
     protected $fillable = [
         'KategoriID', 'Nama', 'CreatedAt', 'UpdatedAt'
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'KategoriID');
+    }
 }
