@@ -1,16 +1,16 @@
 <x-app-layout>
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto ">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-800">Daftar Purchase Order</h2>
                 <a href="{{ route('purchase-order.create') }}" class="bg-blue-500 text-white px-3 py-2 rounded-lg shadow hover:bg-blue-600 text-sm">Tambah PO</a>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
+                <div class="p-4">
                     @if (session('success'))
                         <div class="mb-4 text-green-600">{{ session('success') }}</div>
                     @endif
-                    <table class="min-w-full border border-gray-200 text-sm">
+                    <table class="min-w-full border border-gray-200 text-xs">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-3 py-2 border">No</th>
