@@ -13,16 +13,23 @@ class PurchaseOrder extends Model
     protected $table = 'purchase_orders';
 
     protected $fillable = [
-        'sku',
-        'nama_produk',
-        'stock',
-        'min',
-        'max',
-        'jumlah_beli',
-        'satuan',
-        'isi_kardus',
-        'harga_satuan',
-        'total_harga',
+        'ProdukID',
+        'SupplierID',
+        'JumlahBeli',
+        'IsiKardus',
+        'HargaSatuan',
+        'TotalHarga',
+        'Status',
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'ProdukID', 'ProdukID');
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'SupplierID', 'SupplierID');
+    }
 }
 ?>

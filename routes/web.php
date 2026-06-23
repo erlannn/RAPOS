@@ -46,9 +46,12 @@ Route::middleware(['auth', 'role:Admin|Gudang'])->group(function () {
     Route::resource('/inventory/inventori', InventoriController::class)->except(['show']);
     Route::resource('/inventory/mutasistok', MutasiStokController::class)->except(['show']);
 
-    Route::view('/inventory/stok', 'inventory.stock')->name('inventory.stock');
-    Route::view('/inventory/barang-masuk', 'inventory.incoming')->name('inventory.incoming');
-    Route::view('/inventory/barang-keluar', 'inventory.outgoing')->name('inventory.outgoing');
+    Route::get('/inventory/stok', [InventoriController::class, 'stock'])->name('inventory.stock');
+    Route::get('/inventory/barang-masuk', [PurchaseOrderController::class, 'incoming'])->name('inventory.incoming');
+    Route::post('/inventory/barang-masuk/{id}/receive', [PurchaseOrderController::class, 'receive'])->name('inventory.incoming.receive');
+    
+    Route::get('/inventory/barang-keluar', [MutasiStokController::class, 'outgoing'])->name('inventory.outgoing');
+    Route::post('/inventory/barang-keluar/process', [MutasiStokController::class, 'processOutgoing'])->name('inventory.outgoing.process');
 });
 
 

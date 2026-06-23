@@ -16,4 +16,14 @@ class MutasiStok extends Model
     protected $fillable = [
         'Tanggal', 'ProdukID', 'StoreID', 'JenisMutasi', 'ReferensiTabel', 'ReferensiID', 'Qty', 'SaldoSebelum', 'SaldoSesudah', 'Keterangan', 'UserID', 'CreatedAt'
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'ProdukID');
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'StoreID');
+    }
 }

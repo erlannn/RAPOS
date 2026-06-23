@@ -11,35 +11,34 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-3 py-2 border">No</th>
-                                <th class="px-3 py-2 border">InventoriID</th>
-                                <th class="px-3 py-2 border">Jenis Transaksi</th>
-                                <th class="px-3 py-2 border">Jumlah</th>
-                                <th class="px-3 py-2 border">Tanggal</th>
-                                <th class="px-3 py-2 border">Aksi</th>
+                                <th class="px-3 py-2 border">PO ID</th>
+                                <th class="px-3 py-2 border">Produk</th>
+                                <th class="px-3 py-2 border">Supplier</th>
+                                <th class="px-3 py-2 border">Jumlah Beli</th>
+                                <th class="px-3 py-2 border">Aksi Terima</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($pendingPOs as $po)
                             <tr>
-                                <td class="px-3 py-2 border">1</td>
-                                <td class="px-3 py-2 border">INV001</td>
-                                <td class="px-3 py-2 border">Masuk</td>
-                                <td class="px-3 py-2 border">50</td>
-                                <td class="px-3 py-2 border">2023-01-01</td>
+                                <td class="px-3 py-2 border text-center">{{ $loop->iteration }}</td>
+                                <td class="px-3 py-2 border text-center">PO-{{ str_pad($po->id, 5, '0', STR_PAD_LEFT) }}</td>
+                                <td class="px-3 py-2 border">{{ $po->produk->NamaProduk ?? 'N/A' }}</td>
+                                <td class="px-3 py-2 border">{{ $po->supplier->NamaSupplier ?? 'N/A' }}</td>
+                                <td class="px-3 py-2 border text-center">{{ $po->JumlahBeli }}</td>
                                 <td class="px-3 py-2 border text-center">
-                                    <a href="#" class="text-blue-600 hover:underline">Detail</a>
+                                    <form action="{{ route('inventory.incoming.receive', $po->id) }}" method="POST" class="inline-flex gap-2 items-center">
+                                        @csrf
+                                        <input type="number" name="jumlah_diterima" value="{{ $po->JumlahBeli }}" min="1" max="{{ $po->JumlahBeli }}" class="border-gray-300 rounded-md w-20 text-sm" required>
+                                        <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600">Terima</button>
+                                    </form>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td class="px-3 py-2 border">2</td>
-                                <td class="px-3 py-2 border">INV002</td>
-                                <td class="px-3 py-2 border">Masuk</td>
-                                <td class="px-3 py-2 border">30</td>
-                                <td class="px-3 py-2 border">2023-01-05</td>
-                                <td class="px-3 py-2 border text-center">
-                                    <a href="#" class="text-blue-600 hover:underline">Detail</a>
-                                </td>
+                                <td colspan="6" class="px-3 py-4 border text-center text-gray-500">Tidak ada PO yang tertunda</td>
                             </tr>
-                            <!-- Add more dummy rows as needed -->
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

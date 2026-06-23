@@ -77,6 +77,14 @@
                                 <input type="text" name="Satuan" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Satuan">
                             </div>
                             <div>
+                                <label class="block text-sm font-medium text-gray-700">Min Stok</label>
+                                <input type="number" name="MinStok" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Min Stok" value="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Max Stok</label>
+                                <input type="number" name="MaxStok" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Max Stok" value="0">
+                            </div>
+                            <div>
                                 <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
                                 <input type="text" name="Deskripsi" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Deskripsi">
                             </div>

@@ -14,7 +14,7 @@ class Produk extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'BrandID', 'KategoriID', 'SubKategoriID', 'SKU', 'Barcode', 'NamaProduk', 'Satuan', 'Deskripsi', 'StatusAktif', 'CreatedAt', 'UpdatedAt'
+        'BrandID', 'KategoriID', 'SubKategoriID', 'SKU', 'Barcode', 'NamaProduk', 'Satuan', 'MinStok', 'MaxStok', 'Deskripsi', 'StatusAktif', 'CreatedAt', 'UpdatedAt'
     ];
 
     public function kategori()

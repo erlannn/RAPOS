@@ -79,6 +79,14 @@
                                 <input type="text" name="Satuan" value="{{ $produk->Satuan }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Satuan">
                             </div>
                             <div>
+                                <label class="block text-sm font-medium text-gray-700">Min Stok</label>
+                                <input type="number" name="MinStok" value="{{ $produk->MinStok }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Min Stok">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Max Stok</label>
+                                <input type="number" name="MaxStok" value="{{ $produk->MaxStok }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Max Stok">
+                            </div>
+                            <div>
                                 <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
                                 <input type="text" name="Deskripsi" value="{{ $produk->Deskripsi }}" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Masukkan Deskripsi">
                             </div>

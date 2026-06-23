@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('Barcode', 100)->unique();
             $table->string('NamaProduk', 255);
             $table->string('Satuan', 30);
+            $table->integer('MinStok')->default(0);
+            $table->integer('MaxStok')->default(0);
             $table->text('Deskripsi')->nullable();
             $table->boolean('StatusAktif')->default(1);
             $table->timestamp('CreatedAt')->useCurrent()->nullable();

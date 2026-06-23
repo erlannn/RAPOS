@@ -70,4 +70,33 @@ class InventoriController extends Controller
             return back()->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage());
         }
     }
+
+    public function stock(Request $request)
+    {
+        $store_id = $request->input('store_id');
+        $stores = \App\Models\Store::all();
+
+        $barangMasuk = \App\Models\MutasiStok::with(['produk', 'store'])->where('Qty', '>', 0)->orderBy('CreatedAt', 'desc')->get();
+        $barangKeluar = \App\Models\MutasiStok::with(['produk', 'store'])->where('Qty', '<', 0)->orderBy('CreatedAt', 'desc')->get();
+
+        if ($store_id) {
+            $inventoris = \App\Models\Inventori::with(['produk', 'store'])->where('StoreID', $store_id)->get();
+            $isAllStores = false;
+        } else {
+            $inventoris = \App\Models\Inventori::with(['produk'])
+                ->selectRaw('ProdukID, SUM(StokSaatIni) as TotalStok, MAX(MinimumStok) as MinStok')
+                ->groupBy('ProdukID')
+                ->get();
+            
+            // Map the aggregated data to match the expected format somewhat
+            $inventoris->transform(function($inv) {
+                $inv->StokSaatIni = $inv->TotalStok;
+                $inv->MinimumStok = $inv->MinStok;
+                return $inv;
+            });
+            $isAllStores = true;
+        }
+
+        return view('inventory.stock', compact('inventoris', 'barangMasuk', 'barangKeluar', 'stores', 'store_id', 'isAllStores'));
+    }
 }

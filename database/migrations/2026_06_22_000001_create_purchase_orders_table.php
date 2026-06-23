@@ -12,19 +12,18 @@ return new class extends Migration {
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('sku');
-            $table->string('nama_produk');
-            $table->integer('stock');
-            $table->integer('min');
-            $table->integer('max');
-            $table->integer('jumlah_beli');
-            $table->string('satuan');
-            $table->integer('isi_kardus');
-            $table->decimal('harga_satuan', 15, 2);
-            $table->decimal('total_harga', 15, 2);
+            $table->unsignedBigInteger('ProdukID');
+            $table->unsignedBigInteger('SupplierID');
+            $table->integer('JumlahBeli');
+            $table->integer('IsiKardus')->default(1);
+            $table->decimal('HargaSatuan', 15, 2);
+            $table->decimal('TotalHarga', 15, 2);
+            $table->string('Status')->default('Pending'); // Pending, Diterima
             $table->timestamps();
             $table->softDeletes();
-            $table->unique('sku');
+
+            $table->foreign('ProdukID')->references('ProdukID')->on('produk')->onDelete('cascade');
+            $table->foreign('SupplierID')->references('SupplierID')->on('supplier')->onDelete('cascade');
         });
     }
 
